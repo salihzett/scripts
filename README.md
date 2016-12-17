@@ -1,1 +1,1 @@
-# test
+# mac-scripts
