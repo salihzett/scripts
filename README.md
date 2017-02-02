@@ -1,1 +1,2 @@
-# mac-scripts
+# macscripts
+Useful scripts for Apple macOS
