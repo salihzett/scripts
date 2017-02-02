@@ -10,7 +10,7 @@ sudo scutil --set LocalHostName ${user}s-${model}
 sudo scutil --set HostName ${user}s-${model}.${domain}
 sleep .5
 echo "============="
-echo "Computer:			$(scutil --get ComputerName)"
+echo "Computername:			  $(scutil --get ComputerName)"
 echo "Local Hostname:			$(scutil --get LocalHostName)"
-echo "Hostname:			$(scutil --get HostName)"
+echo "Hostname:			      $(scutil --get HostName)"
 echo "============="
