@@ -1,8 +1,7 @@
 #!/bin/sh
 echo "Which IP needs a new name?"
 read varip
-echo "It is $varip, ok..."
-echo "Give me the new name for the new mac, only firstname? (schema: Salihs-Pro)"
+echo "Give me the new name for the new mac, only firstname: (schema: Salihs-Pro)"
 read varmac
 echo "olala $varmac, lets go"
 
