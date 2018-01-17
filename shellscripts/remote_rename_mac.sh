@@ -5,9 +5,10 @@ echo "Give me the new name for the new mac, only firstname: (schema: Salihs-Pro)
 read varmac
 echo "olala $varmac, lets go"
 
-ssh $varip "sudo /usr/sbin/scutil --set HostName ${varmac}"
-ssh $varip "sudo /usr/sbin/scutil --set LocalHostName ${varmac}"
 ssh $varip "sudo /usr/sbin/scutil --set ComputerName ${varmac}"
+ssh $varip "sudo /usr/sbin/scutil --set LocalHostName ${varmac}"
+ssh $varip "sudo /usr/sbin/scutil --set HostName ${varmac}.domain"
+
 
 echo "=== new name ==="
 
