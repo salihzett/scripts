@@ -74,7 +74,6 @@ done
 
 
 echo "***** Rename Mac *****"
-#!/bin/sh
 localUsers=$( dscl . list /Users UniqueID | awk '$2 >= 501 {print $1}' | grep -v admin )
 model=$(system_profiler SPHardwareDataType | grep "Model Name" | awk '{print $4}')
 
