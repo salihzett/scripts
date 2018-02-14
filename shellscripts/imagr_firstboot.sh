@@ -1,11 +1,9 @@
-## for using with imagr
-
 #!/bin/sh
-
-echo "***** Checking for Software *****"
+echo "***** Checking for Software... and install them *****"
 echo ""
 
 /usr/sbin/softwareupdate -l
+/usr/sbin/softwareupdate -i -a
 /usr/local/munki/managedsoftwareupdate 
 /usr/local/munki/managedsoftwareupdate --installonly
 
@@ -25,33 +23,65 @@ echo ""
 /usr/bin/defaults write /Library/Preferences/com.apple.TimeMachine DoNotOfferNewDisksForBackup -bool true
 
 # disable apple autoupdate
-/usr/bin/defaults write /Library/Preferences/com.apple.commerce AutoUpdateRestartRequired -bool true
+/usr/bin/defaults write /Library/Preferences/com.apple.commerce AutoUpdateRestartRequired -bool false
 
-# Set the Open and Save options in Office 2016 apps to default to "On My Mac" instead of "Online Locations". (for all users)
+# Set the save options in office 2016
 /usr/bin/defaults write /Library/Preferences/com.microsoft.office DefaultsToLocalOpenSave -bool true
 
-# set timezone and timeserver
+# set time config
 /usr/sbin/systemsetup -settimezone Europe/Berlin
 /usr/sbin/systemsetup -setnetworktimeserver time.euro.apple.com
 /usr/sbin/systemsetup -setusingnetworktime on
 
+echo "***** Configuring User Folder *****"
 # set user directory für cadmin, because createuserpkg dont do it
 cd /Users/
-mkdir cadmin
-chown cadmin:wheel cadmin/
-chmod 700 cadmin/
+sudo mkdir cadmin
+sudo chown cadmin:wheel cadmin/
+sudo chmod 700 cadmin/
 cd cadmin/
-mkdir .ssh
-chown cadmin:staff .ssh/
-chmod 755 .ssh/
+sudo mkdir .ssh
+sudo chown cadmin:staff .ssh/
+sudo chmod 755 .ssh/
 cd .ssh/
-chown cadmin:staff authorized_keys
 
+echo "***** Install Brew *****"
 # install brew
 /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 
+echo "***** Configuring Wifi *****"
 # join Wifi
-/usr/sbin/networksetup -setairportnetwork en0 >SSID< "PASSWD"
+/usr/sbin/networksetup -setairportnetwork en0 SSID "KEY"
+
+echo "***** Configuring Loginwindow *****"
+# Login Message
+/usr/bin/defaults write /Library/Preferences/com.apple.loginwindow LoginwindowText "AAABBBCCC"
+
+echo "***** Configuring id_rsa *****"
+# add id_rsa.pub
+echo "ssh-rsa..........." >> /Users/cadmin/.ssh/authorized_keys 
+
+echo "***** Download XXXYYY Files to user Desktop *****"
+localUsers=$( dscl . list /Users UniqueID | awk '$2 >= 501 {print $1}' | grep -v admin )
+cd /tmp
+curl -O http://192.168.1.49/stuff/XXX.pdf
+curl -O http://192.168.1.49/stuff/YYY.pdf
+
+for userName in "$localUsers"; do
+    cp /tmp/XXX.pdf /Users/$userName/Desktop
+    cp /tmp/YYY.pdf /Users/$userName/Desktop
+done
+
+
+echo "***** Rename Mac *****"
+#!/bin/sh
+localUsers=$( dscl . list /Users UniqueID | awk '$2 >= 501 {print $1}' | grep -v admin )
+model=$(system_profiler SPHardwareDataType | grep "Model Name" | awk '{print $4}')
+
+for userName in "$localUsers"; do
+   sudo /usr/sbin/scutil --set ComputerName ${userName}s-${model}
+   sudo /usr/sbin/scutil --set HostName ${userName}s-${model}.hp
+done
 
 echo "***** FINISHED *****"
 echo "***** LAST CHECK THEN REBOOT *****"
