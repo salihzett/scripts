@@ -114,7 +114,7 @@ done
 
 echo "***** set Background *****"
 cd /Users/Shared
-curl -O http://192.168.1.49/stuff/xxx.jpg
+curl -O http://192.168.1.X/stuff/xxx.jpg
 osascript -e 'tell application "Finder" to set desktop picture to POSIX file "/Users/Shared/xxx.jpg"'
 
 echo "***** FINISHED *****"
