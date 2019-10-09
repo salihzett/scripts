@@ -1,2 +1,2 @@
-# macscripts
-Useful scripts for Apple macOS
+# scripts
+Useful scripts for Apple macOS and Mircosoft Windows 
