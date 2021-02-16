@@ -33,3 +33,6 @@ killall MKCleanService
 killall MacKeeper
 
 echo "***** CLEAN *****"
+
+exit 0 ## Success
+exit 1 ## Failure
