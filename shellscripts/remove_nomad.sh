@@ -15,3 +15,6 @@ sudo rm -rf "/Library/Managed Preferences/com.trusourcelabs.NoMAD.plist"
 sudo rm -rf "/Library/Managed Preferences/$loggedInUser/com.trusourcelabs.NoMAD.plist"
 sudo rm -rf "/Users/$loggedInUser/Library/LaunchAgents/com.trusourcelabs.NoMAD.plist"
 sudo rm -rf "/Library/LaunchAgents/com.trusourcelabs.NoMAD.plist"
+
+exit 0 ## Success
+exit 1 ## Failure
