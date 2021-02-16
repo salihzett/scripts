@@ -119,3 +119,6 @@ if [[ ${osvers} -ge 10 ]]; then
  /usr/sbin/chown root:admin "$CRASHREPORTER_SUPPORT"/DiagnosticMessagesHistory.plist
 
 fi
+
+exit 0 ## Success
+exit 1 ## Failure
