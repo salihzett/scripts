@@ -7,3 +7,6 @@ sudo defaults write /Library/Preferences/MunkiReport Passphrase 'xxx-xxx-xxx-xxx
 sudo defaults write /Library/Preferences/ManagedInstalls.plist InstallAppleSoftwareUpdates -bool TRUE
 sudo /usr/local/munki/managedsoftwareupdate
 echo "#####################################################"
+
+exit 0 ## Success
+exit 1 ## Failure
