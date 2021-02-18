@@ -18,12 +18,8 @@
 # minimize windows into the application in dock
 /usr/bin/defaults write com.apple.dock minimize-to-application -bool true
 
-# set locationservice
-/usr/bin/defaults write /var/db/locationd/Library/Preferences/ByHost/com.apple.locationd LocationServicesEnabled -int 1
-
 # enable automatically quit printer app once print jobs is finished
 /usr/bin/defaults write com.apple.print.PrintingPrefs "Quit When Finished" -bool true
-
 
 exit 0		## Success
 exit 1		## Failure
