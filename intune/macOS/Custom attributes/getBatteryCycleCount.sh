@@ -7,5 +7,6 @@
 ##
 ############################################################################################
 
-battery=$(system_profiler SPPowerDataType | grep "Cycle Count" | awk '{print $3}'	)
+battery=$(system_profiler SPPowerDataType | grep "Cycle Count" | awk '{print $3}')
+
 echo $battery
